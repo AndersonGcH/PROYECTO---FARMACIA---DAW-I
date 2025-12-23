@@ -1,0 +1,9 @@
+spring.application.name=Farmacia
+server.port=9090
+spring.datasource.username=root
+spring.datasource.password=mysql
+spring.datasource.url=jdbc:mysql://localhost:3306/bd_DAW1
+#create database bd_prueba
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
