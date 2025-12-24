@@ -47,10 +47,10 @@ public class Notificacion {
     private LocalDateTime fecha = LocalDateTime.now();
     
     @Column(name = "estado", length = 20)
-    private String estado = "PENDIENTE";  // PENDIENTE, ATENDIDA
+    private String estado = "PENDIENTE";
     
     @Transient
-    private String tipo = "BAJO_STOCK"; // BAJO_STOCK, PROXIMO_CADUCAR
+    private String tipo = "BAJO_STOCK";
     
     // Constructor simplificado
     public Notificacion(Medicamento medicamento, Sede sede, String mensaje, String tipo) {
@@ -61,4 +61,6 @@ public class Notificacion {
         this.fecha = LocalDateTime.now();
         this.estado = "PENDIENTE";
     }
+    
+    
 }

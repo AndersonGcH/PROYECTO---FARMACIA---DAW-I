@@ -1,6 +1,7 @@
 package com.proyecto.mapper;
 
 
+import com.proyecto.dto.NotificacionDto;
 import com.proyecto.dto.NotificacionResponseDTO;
 import com.proyecto.model.Notificacion;
 import org.springframework.stereotype.Component;
@@ -46,5 +47,33 @@ public class NotificacionMapper {
         notificacion.setEstado("PENDIENTE");
         
         return notificacion;
+    }
+    
+ // En NotificacionMapper.java
+    public NotificacionDto toDto(Notificacion notificacion) {
+        if (notificacion == null) return null;
+
+        NotificacionDto dto = new NotificacionDto();
+        
+        if (notificacion.getIdNotificacion() != null) {
+            if (notificacion.getIdNotificacion() > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("ID de notificación demasiado grande para el reporte");
+            }
+            dto.setIdNotificacion(notificacion.getIdNotificacion().intValue());
+        }
+
+        dto.setMensaje(notificacion.getMensaje());
+        dto.setFecha(notificacion.getFecha());
+        dto.setEstado(notificacion.getEstado());
+        
+        if (notificacion.getMedicamento() != null) {
+            dto.setNombreMedicamento(notificacion.getMedicamento().getNombre());
+        }
+        
+        if (notificacion.getSede() != null) {
+            dto.setNombreSede(notificacion.getSede().getNombre());
+        }
+        
+        return dto;
     }
 }

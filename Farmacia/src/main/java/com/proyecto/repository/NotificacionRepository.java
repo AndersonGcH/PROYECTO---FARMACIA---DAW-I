@@ -13,7 +13,7 @@ import java.util.List;
 public interface NotificacionRepository extends JpaRepository<Notificacion, Long> {
     
     // Buscar notificaciones por sede
-    List<Notificacion> findBySedeIdSede(Long idSede);
+    List<Notificacion> findBySedeIdSedeOrderByFechaDesc(Long idSede);
     
     // Buscar notificaciones por sede y estado
     List<Notificacion> findBySedeIdSedeAndEstado(Long idSede, String estado);
@@ -25,7 +25,7 @@ public interface NotificacionRepository extends JpaRepository<Notificacion, Long
     List<Notificacion> findBySedeIdSedeAndEstadoOrderByFechaDesc(Long idSede, String estado);
     
     // Buscar notificaciones recientes (últimos 7 días)
-    @Query("SELECT n FROM Notificacion n WHERE n.sede.idSede = :idSede AND n.fecha >= :fechaInicio")
+    @Query("SELECT n FROM Notificacion n WHERE n.sede.idSede = :idSede AND n.fecha >= :fechaInicio ORDER BY n.fecha DESC")
     List<Notificacion> findNotificacionesRecientes(
         @Param("idSede") Long idSede,
         @Param("fechaInicio") LocalDateTime fechaInicio

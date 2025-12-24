@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -40,8 +41,11 @@ public class Medicamento {
     @Column(name = "descripcion", length = 255)
     private String descripcion;
     
-    @Column(name = "lote", nullable = false)
-    private Integer stockTotal = 0;  // Stock total calculado
+    @Column(name = "stock_total", nullable = false)
+    private Integer stockTotal = 0; 
+    
+    @Transient
+    private String nombreSede;
     
     // Constructor sin ID para creación
     public Medicamento(Sede sede, String nombre, String descripcion) {
@@ -50,4 +54,6 @@ public class Medicamento {
         this.descripcion = descripcion;
         this.stockTotal = 0;
     }
+    
+    
 }

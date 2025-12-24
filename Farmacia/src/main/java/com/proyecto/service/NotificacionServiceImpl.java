@@ -28,7 +28,8 @@ public class NotificacionServiceImpl implements NotificacionService {
     
     @Override
     public List<NotificacionResponseDTO> listarNotificacionesPorSede(Long idSede) {
-        List<Notificacion> notificaciones = notificacionRepository.findBySedeIdSede(idSede);
+        // Usa el método que ya ordena por fecha descendente
+        List<Notificacion> notificaciones = notificacionRepository.findBySedeIdSedeOrderByFechaDesc(idSede);
         return notificaciones.stream()
                 .map(notificacionMapper::toResponseDTO)
                 .collect(Collectors.toList());
@@ -36,8 +37,8 @@ public class NotificacionServiceImpl implements NotificacionService {
     
     @Override
     public List<NotificacionResponseDTO> listarNotificacionesPendientes(Long idSede) {
-        List<Notificacion> notificaciones = notificacionRepository
-                .findBySedeIdSedeAndEstadoOrderByFechaDesc(idSede, FarmaceuticoConstants.ESTADO_NOTIF_PENDIENTE);
+        // Usa el método que ya ordena por fecha descendente
+        List<Notificacion> notificaciones = notificacionRepository.findBySedeIdSedeAndEstadoOrderByFechaDesc(idSede, FarmaceuticoConstants.ESTADO_NOTIF_PENDIENTE);
         return notificaciones.stream()
                 .map(notificacionMapper::toResponseDTO)
                 .collect(Collectors.toList());

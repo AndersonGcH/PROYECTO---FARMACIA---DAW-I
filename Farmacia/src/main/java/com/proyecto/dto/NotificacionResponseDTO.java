@@ -14,8 +14,8 @@ public class NotificacionResponseDTO {
     
     private Long idNotificacion;
     private String mensaje;
-    private String tipo; // BAJO_STOCK, PROXIMO_CADUCAR
-    private String estado; // PENDIENTE, ATENDIDA
+    private String tipo; 
+    private String estado;
     private String fecha;
     private String fechaFormateada;
     private Long idMedicamento;

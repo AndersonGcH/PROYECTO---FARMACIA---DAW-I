@@ -42,4 +42,16 @@ public class Sede {
     
     @OneToMany(mappedBy = "sede", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Notificacion> notificaciones = new ArrayList<>();
+    
+    // Getters y Setters
+    
+    //--------CAMBIO ID SEDE A LONG-----------
+    public Long getIdSede() { return idSede; }
+    public void setIdSede(Long idSede) { this.idSede = idSede; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
 }
