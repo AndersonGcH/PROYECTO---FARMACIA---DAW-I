@@ -1,6 +1,8 @@
 package com.proyecto.model;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,6 +44,11 @@ public class Sede {
     
     @OneToMany(mappedBy = "sede", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Notificacion> notificaciones = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "sede")
+    @JsonIgnore
+    private List<Usuario> usuarios = new ArrayList<>();
+    
     
     // Getters y Setters
     
