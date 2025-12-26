@@ -1,6 +1,5 @@
 package com.proyecto.mapper;
 
-
 import com.proyecto.dto.LoginResponseDTO;
 import com.proyecto.dto.RegistroUsuarioDTO;
 import com.proyecto.dto.UsuarioResponseDTO;
@@ -45,11 +44,11 @@ public class UsuarioMapperManual {
     // -------------------------------
     // Usuario -> LoginResponseDTO
     // -------------------------------
-    public static LoginResponseDTO toLoginResponseDTO(Usuario usuario, String token) {
+    public static LoginResponseDTO toLoginResponseDTO(Usuario usuario) {
         if (usuario == null) return null;
 
         String rolNombre = usuario.getRol() != null ? usuario.getRol().getNombre() : null;
 
-        return new LoginResponseDTO(token, usuario.getEmail(), rolNombre);
+        return new LoginResponseDTO(usuario.getEmail(), rolNombre);
     }
 }

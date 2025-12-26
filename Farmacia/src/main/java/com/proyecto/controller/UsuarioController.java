@@ -20,8 +20,6 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    
-    ////http://localhost:9090/api/usuarios/registro
     // --------------------------
     // Registrar usuario
     // --------------------------
@@ -50,31 +48,31 @@ public class UsuarioController {
     }
 
     // --------------------------
-    // Login
+    // Login simple sin token
     // --------------------------
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestParam String email, 
+    public ResponseEntity<LoginResponseDTO> login(@RequestParam String email,
                                                   @RequestParam String password) {
         LoginResponseDTO response = usuarioService.login(email, password);
         return ResponseEntity.ok(response);
     }
 
     // --------------------------
-    // Enviar token de recuperación
+    // Enviar instrucciones de recuperación (sin token)
     // --------------------------
     @PostMapping("/recuperar-password")
-    public ResponseEntity<Void> enviarTokenRecuperacion(@RequestParam String email) {
-        usuarioService.enviarTokenRecuperacion(email);
+    public ResponseEntity<Void> enviarInstruccionesRecuperacion(@RequestParam String email) {
+        usuarioService.enviarTokenRecuperacion(email); // ya no genera token
         return ResponseEntity.ok().build();
     }
 
     // --------------------------
-    // Resetear contraseña
+    // Resetear contraseña deshabilitado
     // --------------------------
     @PostMapping("/reset-password")
-    public ResponseEntity<Void> resetPassword(@RequestParam String token, 
+    public ResponseEntity<Void> resetPassword(@RequestParam String token,
                                               @RequestParam String nuevaPassword) {
-        usuarioService.resetPassword(token, nuevaPassword);
-        return ResponseEntity.ok().build();
+        // Endpoint deshabilitado porque quitamos tokens
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 }

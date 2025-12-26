@@ -29,7 +29,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final RolRepository rolRepository;
     private final SedeRepository sedeRepository;
     private final PasswordEncoder passwordEncoder; // Para encriptar passwords
-    private final JwtService jwtService; // Para generar tokens JWT
 
     // --------------------------
     // Crear usuario (registro)
@@ -93,35 +92,24 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new RuntimeException("Password incorrecta");
         }
 
-        String token = jwtService.generateToken(usuario.getEmail());
-        return UsuarioMapperManual.toLoginResponseDTO(usuario, token);
+        // Usamos el mapper actualizado que ya no tiene token
+        return UsuarioMapperManual.toLoginResponseDTO(usuario);
     }
 
-    // --------------------------
-    // Enviar token de recuperación
-    // --------------------------
+
     @Override
     public void enviarTokenRecuperacion(String email) {
-        // Generar token y enviarlo por email
-        // Puedes usar un token JWT o UUID
+        // Simplemente validamos que el usuario exista, ya no se genera token
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        String token = jwtService.generateToken(usuario.getEmail());
-        // Aquí enviar token por email (servicio de correo)
+        // Aquí podrías enviar directamente un mensaje con instrucciones
+        // sin token
     }
 
-    // --------------------------
-    // Resetear contraseña
-    // --------------------------
     @Override
     public void resetPassword(String token, String nuevaPassword) {
-        // Validar token
-        String email = jwtService.extractUsername(token);
-        Usuario usuario = usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        usuario.setPassword(passwordEncoder.encode(nuevaPassword));
-        usuarioRepository.save(usuario);
+        throw new UnsupportedOperationException("Reset de password con token deshabilitado.");
     }
+
 }
