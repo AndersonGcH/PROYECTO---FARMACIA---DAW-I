@@ -1,10 +1,16 @@
 package com.proyecto.controller;
 
 import com.proyecto.dto.NotificacionResponseDTO;
+import com.proyecto.model.Usuario;
+import com.proyecto.repository.UsuarioRepository;
 import com.proyecto.service.NotificacionService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +27,26 @@ public class NotificacionController {
     
     private final NotificacionService notificacionService;
     
-    // TEMPORAL: Para pruebas
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+ 
     private Long obtenerIdSedeTemporal() {
-        return 1L; // Cambia según necesites
+        Authentication auth = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+
+        String email = auth.getName();
+
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() ->
+                    new RuntimeException("Usuario no encontrado"));
+
+        if (usuario.getSede() == null) {
+            throw new RuntimeException("El usuario no tiene sede asignada");
+        }
+
+        return usuario.getSede().getIdSede();
     }
-    
     // ========== VISTAS THYMELEAF ==========
     
     // VISTA: Listar todas las notificaciones (HTML)
