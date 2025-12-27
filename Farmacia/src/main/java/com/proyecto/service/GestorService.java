@@ -8,6 +8,8 @@ import com.proyecto.model.Orden;
 import java.util.List;
 
 public interface GestorService {
+	
+	List<com.proyecto.model.Medicamento> listarMedicamentosBajoStock(Long idSede);
 
     // Stock
     Integer obtenerStockPorMedicamento(Long idMedicamento);

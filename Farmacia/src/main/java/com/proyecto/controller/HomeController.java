@@ -8,7 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String redirectToHome() {
-        // Redirige al endpoint que maneja la lógica por rol
         return "redirect:/api/usuarios/home";
     }
 }

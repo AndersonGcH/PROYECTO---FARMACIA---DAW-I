@@ -49,7 +49,7 @@ public class Notificacion {
     @Column(name = "estado", length = 20)
     private String estado = "PENDIENTE";
     
-    @Transient
+    
     private String tipo = "BAJO_STOCK";
     
     // Constructor simplificado

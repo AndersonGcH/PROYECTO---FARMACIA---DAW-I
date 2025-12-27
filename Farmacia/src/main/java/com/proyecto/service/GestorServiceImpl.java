@@ -215,4 +215,9 @@ public class GestorServiceImpl implements GestorService {
         Usuario usuario = usuarioRepository.findById(idUsuario.intValue()).orElse(null);
         return usuario != null ? usuario.getNombre() : "Usuario no encontrado";
     }
+    
+    @Override
+    public List<Medicamento> listarMedicamentosBajoStock(Long idSede) {
+        return medicamentoRepository.findMedicamentosBajoStock(idSede, FarmaceuticoConstants.UMBRAL_BAJO_STOCK);
+    }
 }

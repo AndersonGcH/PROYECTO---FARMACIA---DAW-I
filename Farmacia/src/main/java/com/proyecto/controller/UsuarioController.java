@@ -50,27 +50,8 @@ public class UsuarioController {
 
     // ---------- REDIRECCIÓN POR ROL ----------
     @GetMapping("/home")
-    public String redireccionPorRol(Authentication authentication) {
-
-        Set<String> roles = authentication.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toSet());
-
-        if (roles.contains("ROLE_ADMIN")) {
-            return "redirect:/admin/usuarios";
-        }
-
-        if (roles.contains("ROLE_GESTOR")) {
-            return "redirect:/gestor/notificaciones";
-        }
-
-        if (roles.contains("ROLE_TRANSPORTISTA")) {
-            return "redirect:/transportista/ordenes";
-        }
-
-        return "redirect:/farmaceutico/lotes"
-        		+ "";
+    public String redireccionPorRol() {
+        return "redirect:/dashboard";
     }
 
     // ================= REGISTRO =================
