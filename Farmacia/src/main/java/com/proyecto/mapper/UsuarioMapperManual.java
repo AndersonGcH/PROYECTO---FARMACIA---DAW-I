@@ -19,6 +19,7 @@ public class UsuarioMapperManual {
         dto.setId(usuario.getIdUsuario());
         dto.setNombre(usuario.getNombre());
         dto.setEmail(usuario.getEmail());
+        dto.setTelefono(usuario.getTelefono());
         dto.setRol(usuario.getRol() != null ? usuario.getRol().getNombre() : null);
         dto.setSede(usuario.getSede() != null ? usuario.getSede().getNombre() : null);
 
@@ -34,6 +35,7 @@ public class UsuarioMapperManual {
         Usuario usuario = new Usuario();
         usuario.setNombre(dto.getNombre());
         usuario.setEmail(dto.getEmail());
+        usuario.setTelefono(dto.getTelefono());
         usuario.setPassword(dto.getPassword());
         usuario.setRol(rol);   // Debes pasar el objeto Rol existente
         usuario.setSede(sede); // Debes pasar el objeto Sede existente

@@ -8,21 +8,27 @@ import com.proyecto.dto.UsuarioResponseDTO;
 
 public interface UsuarioService {
 
-    // Crear usuario (registro)
+	 // ================= REGISTRO =================
     UsuarioResponseDTO crearUsuario(RegistroUsuarioDTO dto);
 
-    // Obtener todos los usuarios
+    // ================= LISTAR =================
     List<UsuarioResponseDTO> listarUsuarios();
 
-    // Obtener un usuario por email
+    // ================= OBTENER =================
     UsuarioResponseDTO obtenerPorEmail(String email);
 
-    // Login
+    // ================= ADMIN =================
+    UsuarioResponseDTO buscarPorEmail(String email);
+
+    UsuarioResponseDTO actualizarUsuario(String email, RegistroUsuarioDTO dto);
+
+    void eliminarUsuario(String email);
+
+    // ================= LOGIN =================
     LoginResponseDTO login(String email, String password);
 
-    // Recuperar contraseña
+    // ================= PASSWORD =================
     void enviarTokenRecuperacion(String email);
 
-    // Resetear contraseña
     void resetPassword(String token, String nuevaPassword);
 }

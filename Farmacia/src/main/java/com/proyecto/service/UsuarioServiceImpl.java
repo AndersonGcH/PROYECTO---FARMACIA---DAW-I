@@ -111,5 +111,59 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void resetPassword(String token, String nuevaPassword) {
         throw new UnsupportedOperationException("Reset de password con token deshabilitado.");
     }
+    
+ // --------------------------
+ // Buscar usuario (ADMIN)
+ // --------------------------
+ @Override
+ public UsuarioResponseDTO buscarPorEmail(String email) {
+     Usuario usuario = usuarioRepository.findByEmail(email)
+             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+     return UsuarioMapperManual.toResponseDTO(usuario);
+ }
+
+ // --------------------------
+ // Actualizar usuario
+ // --------------------------
+ @Override
+ public UsuarioResponseDTO actualizarUsuario(String email, RegistroUsuarioDTO dto) {
+
+     Usuario usuario = usuarioRepository.findByEmail(email)
+             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+     usuario.setNombre(dto.getNombre());
+     usuario.setTelefono(dto.getTelefono());
+
+     if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
+         usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
+     }
+
+     if (dto.getRolId() != null) {
+         Rol rol = rolRepository.findById(dto.getRolId())
+                 .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+         usuario.setRol(rol);
+     }
+
+     if (dto.getSedeId() != null) {
+         Sede sede = sedeRepository.findById(dto.getSedeId())
+                 .orElseThrow(() -> new RuntimeException("Sede no encontrada"));
+         usuario.setSede(sede);
+     }
+
+     usuarioRepository.save(usuario);
+     return UsuarioMapperManual.toResponseDTO(usuario);
+ }
+
+ // --------------------------
+ // Eliminar usuario
+ // --------------------------
+ @Override
+ public void eliminarUsuario(String email) {
+     Usuario usuario = usuarioRepository.findByEmail(email)
+             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+     usuarioRepository.delete(usuario);
+ }
+
+    
 
 }

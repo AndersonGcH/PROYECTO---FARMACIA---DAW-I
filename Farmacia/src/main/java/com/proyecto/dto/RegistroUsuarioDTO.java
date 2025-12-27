@@ -15,6 +15,9 @@ public class RegistroUsuarioDTO {
     private String email;
 
     @NotBlank
+    private String telefono;
+    
+    @NotBlank
     private String password;
 
     private Integer rolId;
