@@ -22,6 +22,8 @@ public class MenuService {
             new MenuOptionDTO("Dashboard", "fa-home", "/dashboard", List.of("ADMINISTRADOR", "FARMACEUTICO", "GESTOR", "TRANSPORTISTA")),
             
             // 👇 Solo para ADMINISTRADOR y FARMACEUTICO
+            new MenuOptionDTO("Usuarios", "fa-users", "/admin/usuarios",List.of("ADMINISTRADOR", "FARMACEUTICO")),
+            new MenuOptionDTO("Sedes", "fa-users", "/admin/sedes",List.of("ADMINISTRADOR", "FARMACEUTICO")),
             new MenuOptionDTO("Medicamentos", "fa-capsules", "/farmaceutico/medicamentos", List.of("ADMINISTRADOR", "FARMACEUTICO")),
             new MenuOptionDTO("Stock y Lotes", "fa-boxes", "/farmaceutico/stock", List.of("ADMINISTRADOR", "FARMACEUTICO")),
             

@@ -76,4 +76,49 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    
+    
+    
+    
+   /////to rest aapi//////
+   
+//    private final UsuarioDetailsServiceImpl usuarioDetailsService;
+//
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//            .csrf(csrf -> csrf.disable())   // deshabilita CSRF
+//            .cors(cors -> cors.disable())   // deshabilita CORS
+//            .authorizeHttpRequests(auth -> auth
+//                .anyRequest().permitAll()   // permite todas las rutas sin autenticación
+//            )
+//            .formLogin(form -> form.disable()); // deshabilita login por formulario
+//
+//        return http.build();
+//    }
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+//        AuthenticationManagerBuilder authBuilder =
+//                http.getSharedObject(AuthenticationManagerBuilder.class);
+//
+//        authBuilder
+//            .userDetailsService(usuarioDetailsService)
+//            .passwordEncoder(passwordEncoder());
+//
+//        return authBuilder.build();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+//
+//    
+//    
+    
+    
+     
+    
+    
 }

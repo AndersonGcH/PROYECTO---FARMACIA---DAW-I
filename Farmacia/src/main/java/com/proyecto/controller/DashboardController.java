@@ -2,9 +2,16 @@
 package com.proyecto.controller;
 
 import com.proyecto.dto.MenuOptionDTO;
+import com.proyecto.repository.RolRepository;
+import com.proyecto.repository.SedeRepository;
+import com.proyecto.repository.UsuarioRepository;
 import com.proyecto.service.*;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Controller
 public class DashboardController {
 
@@ -20,19 +28,12 @@ public class DashboardController {
     private final GestorService gestorService;
     private final TransportistaService transportistaService;
     private final MedicamentoService medicamentoService;
+    private final UsuarioService adminService;
 
-    public DashboardController(MenuService menuService,
-                               NotificacionService notificacionService,
-                               GestorService gestorService,
-                               TransportistaService transportistaService,
-                               MedicamentoService medicamentoService) {
-        this.menuService = menuService;
-        this.notificacionService = notificacionService;
-        this.gestorService = gestorService;
-        this.transportistaService = transportistaService;
-        this.medicamentoService = medicamentoService;
-    }
-
+    
+    
+    
+    
     @GetMapping("/dashboard")
     public String dashboard(Authentication authentication, Model model) {
         // 1. Obtener rol (Spring Security agrega "ROLE_" por defecto)
@@ -57,6 +58,7 @@ public class DashboardController {
             model.addAttribute("bajoStockCount", gestorService.listarMedicamentosBajoStock(sedeId).size());
             model.addAttribute("proximosCaducar", notificacionService.contarNotificacionesPorTipo(sedeId, "PROXIMO_CADUCAR"));
             model.addAttribute("notificacionesPendientes", notificacionService.contarNotificacionesPendientes(sedeId));
+            
         } else if ("GESTOR".equals(userRole)) {
             Long sedeId = 1L;
             model.addAttribute("notificacionesPendientes", notificacionService.contarNotificacionesPendientes(sedeId));
